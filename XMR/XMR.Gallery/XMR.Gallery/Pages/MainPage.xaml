@@ -12,6 +12,9 @@
                VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="48"
                MaxLength="4" ClearButtonVisibility="WhileEditing" Keyboard="Numeric" Completed="pin_Completed"
                />
+        <Button x:Name="clearPinButton" Clicked="clearPin" 
+                FontSize="Subtitle" Padding="10"
+                Text="Сбросить ПИН" HorizontalOptions="Center" VerticalOptions="Center" />
     </StackLayout>
 
 </ContentPage>
