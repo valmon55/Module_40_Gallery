@@ -1,14 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XMR.Gallery.Pages.PictureListPage">
+             xmlns:local="clr-namespace:XMR.Gallery.Pages"
+             x:Class="XMR.Gallery.Pages.PictureListPage"
+             Title="{x:Static local:PictureListPage.PageName}"            
+             >
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Галерея" FontSize="Title"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="Открыть" Clicked="OpenPicture" />
-            <Button Text="Удалить" Clicked="DeletePicture" />
+            <!--<Grid ColumnDefinitions="25*,25*,25*,25*" RowDefinitions="" Margin="2">
+                <Label Text="pictures" />
+            </Grid>-->
+            <Grid ColumnDefinitions="50*, 50*" RowDefinitions="45" Margin="10,15">
+                <Button Text="Открыть" Clicked="OpenPicture" Grid.Column="0" />
+                <Button Text="Удалить" Clicked="DeletePicture" Grid.Column="1" />
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

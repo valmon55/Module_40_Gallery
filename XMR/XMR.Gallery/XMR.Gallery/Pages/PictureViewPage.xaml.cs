@@ -12,8 +12,11 @@ namespace XMR.Gallery.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PictureViewPage : ContentPage
     {
-        public PictureViewPage()
+        public static string ImageName { get; set; }
+        public PictureViewPage(string imageName)
         {
+            ImageName = imageName;
+
             InitializeComponent();
         }
     }

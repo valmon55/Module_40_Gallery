@@ -5,7 +5,7 @@
              x:Class="XMR.Gallery.MainPage"
              NavigationPage.HasNavigationBar="False">
 
-    <StackLayout>
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Label Text="Введите ПИН" FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center" Padding="30,10,30,10"/>
         <Entry x:Name="pin" Placeholder=" ПИН " PlaceholderColor="IndianRed" 
                CharacterSpacing="10" MinimumWidthRequest="200"

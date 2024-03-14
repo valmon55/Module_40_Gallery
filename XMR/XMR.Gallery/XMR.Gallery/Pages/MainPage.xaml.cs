@@ -18,7 +18,7 @@ namespace XMR.Gallery
 
         private async void pin_Completed(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PictureListPage());
+            await Navigation.PushAsync(new PictureListPage("Галерея"));
 
             // скрываем введенный ПИН
             pin.Text = string.Empty;
