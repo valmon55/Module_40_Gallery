@@ -23,9 +23,13 @@ namespace XMR.Gallery.Pages
         {
             await Navigation.PushAsync(new PictureViewPage("Картинка 1"));
         }
-        private void DeletePicture(object sender, EventArgs e)
+        private async void DeletePicture(object sender, EventArgs e)
         {
-            DisplayAlert("Удаление", "Удаляем картинку", "Отмена");
+            await DisplayAlert("Удаление", "Удаляем картинку", "Отмена");
+        }
+        private void GetPictures(string pictureGallery) 
+        { 
+            
         }
     }
 }
