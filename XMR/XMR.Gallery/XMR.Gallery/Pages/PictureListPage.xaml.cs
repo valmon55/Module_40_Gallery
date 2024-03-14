@@ -21,7 +21,7 @@ namespace XMR.Gallery.Pages
             PageName = pageName;
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
             Pictures.Add(new Picture(driveInfo[0].Name, driveInfo[0].Name + " " + driveInfo[1].Name));
-            Pictures.Add(new Picture("/DCIM/Camera/20230504_153643.jpg", "Картинка 1"));
+            Pictures.Add(new Picture("VOLUME1/DCIM/Camera/20230504_153643.jpg", "Картинка 1"));
             Pictures.Add(new Picture("VOLUME1\\DCIM\\Camera\\20230508_130949.jpg", "Картинка 2"));
 
             Pictures.AddRange(GetAllPictures());
