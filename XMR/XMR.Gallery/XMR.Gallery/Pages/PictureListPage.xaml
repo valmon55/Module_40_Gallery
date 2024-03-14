@@ -10,14 +10,19 @@
             <Label Text="Галерея" FontSize="Title"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
-            <Grid ColumnDefinitions="Auto" RowDefinitions="45" Margin="2"
-                  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <Label Text="Картинки" />
-                <Image Source="\VOLUME1\DCIM\Camera\20230504_153643.jpg" />
-                <Image Source="" />
-                <Image Source="" />
-                <Image Source="" />
-            </Grid>
+            <ListView x:Name="pictureList" 
+                      HasUnevenRows="True"
+                      ItemsSource="{Binding Pictures}"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell 
+                            ImageSource="{Binding Path}"
+                            Text="{Binding Name}"
+                            />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Grid ColumnDefinitions="50*, 50*" RowDefinitions="45" Margin="10,15">
                 <Button Text="Открыть" Clicked="OpenPicture" Grid.Column="0" />
                 <Button Text="Удалить" Clicked="DeletePicture" Grid.Column="1" />
