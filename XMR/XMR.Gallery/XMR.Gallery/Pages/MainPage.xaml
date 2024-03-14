@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace.XMR.Gallery.Pages"
-             x:Class="XMR.Gallery.MainPage">
+             x:Class="XMR.Gallery.MainPage"
+             NavigationPage.HasNavigationBar="False">
 
     <StackLayout>
         <Label Text="Введите ПИН" FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center" Padding="30,10,30,10"/>
         <Entry x:Name="pin" Placeholder=" ПИН " PlaceholderColor="IndianRed" 
                CharacterSpacing="10" MinimumWidthRequest="200"
                VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="48"
-               MaxLength="4" ClearButtonVisibility="WhileEditing" Keyboard="Numeric"
+               MaxLength="4" ClearButtonVisibility="WhileEditing" Keyboard="Numeric" Completed="pin_Completed"
                />
     </StackLayout>
 

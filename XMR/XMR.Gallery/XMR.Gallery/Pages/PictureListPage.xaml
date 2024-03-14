@@ -7,6 +7,8 @@
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button Text="Открыть" Clicked="OpenPicture" />
+            <Button Text="Удалить" Clicked="DeletePicture" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
