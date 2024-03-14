@@ -19,6 +19,7 @@ namespace XMR.Gallery.Pages
         public PictureListPage(string pageName)
         {
             PageName = pageName;
+            
             //File.AppendAllText("Test.txt", "Test-Test-Test-Test-Test-Test");
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
             Pictures.Add(new Picture(driveInfo[0].Name, driveInfo[0].Name + " " + driveInfo[1].Name));

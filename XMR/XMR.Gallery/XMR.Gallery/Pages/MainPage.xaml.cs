@@ -42,6 +42,8 @@ namespace XMR.Gallery
                     return;
                 }
             }
+            //await Permissions.RequestAsync<Permissions.StorageRead>();
+            //await Permissions.RequestAsync<Permissions.StorageWrite>();
             await Navigation.PushAsync(new PictureListPage("Галерея"));
 
             // скрываем введенный ПИН
