@@ -49,7 +49,7 @@ namespace XMR.Gallery.Pages
                         {
                             // Используем относительный путь для создания объекта Picture
                             //string relativePath = Path.GetRelativePath(drive.Name, imageFile);
-                            list.Add(new Picture(Path.GetFullPath(imageFile), Path.GetFileName(imageFile)));
+                            list.Add(new Picture(Path.GetFullPath(imageFile), Path.GetFileName(imageFile), File.GetCreationTime(imageFile)));                            
                         }
                     }
                 }

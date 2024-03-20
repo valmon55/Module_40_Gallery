@@ -8,10 +8,12 @@ namespace XMR.Gallery.Model
     {
         public string Path { get; set; }
         public string Name { get; set; }
-        public Picture(string path, string name) 
+        public DateTime CreationDate { get; set; }
+        public Picture(string path, string name, DateTime creationDate) 
         { 
             Path = path;
             Name = name;
+            CreationDate = creationDate;    
         }
     }
 }

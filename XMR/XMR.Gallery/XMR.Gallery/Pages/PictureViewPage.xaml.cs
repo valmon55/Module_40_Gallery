@@ -14,14 +14,15 @@ namespace XMR.Gallery.Pages
     public partial class PictureViewPage : ContentPage
     {
         public static string ImageName { get; set; }
+        public static string ImageDateStr { get; set; }
         public Model.Picture picture { get; set; }
         public static string pictureFile { get; set; }
         public PictureViewPage(Model.Picture _picture)
         {
-            ImageName = "Картинка";
+            ImageName = _picture.Name;
             picture = _picture;
             pictureFile = _picture.Path;
-                //System.IO.Path.Combine(_picture.Path, _picture.Name);
+            ImageDateStr = "Создана " + _picture.CreationDate.ToLongDateString() + " в " +_picture.CreationDate.ToLongTimeString();
             InitializeComponent();
         }
     }

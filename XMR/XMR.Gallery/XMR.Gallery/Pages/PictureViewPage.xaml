@@ -7,10 +7,10 @@
              >
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="ЗДЕСь БУДЕТ КАРТИНКА!"
+            <Image Source="{x:Static local:PictureViewPage.pictureFile}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit" />
+            <Label Text="{x:Static local:PictureViewPage.ImageDateStr}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Image Source="{x:Static local:PictureViewPage.pictureFile}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
