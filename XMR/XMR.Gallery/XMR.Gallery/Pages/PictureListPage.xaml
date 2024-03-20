@@ -10,13 +10,13 @@
             <Label Text="Галерея" FontSize="Title"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
-            <ListView x:Name="pictureList" 
+            <ListView x:Name="pictureList" ItemSelected="pictureList_ItemSelected" 
                       HasUnevenRows="True"
                       ItemsSource="{Binding Pictures}"
                       >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell 
+                        <ImageCell Height="150"  
                             ImageSource="{Binding Path}"
                             Text="{Binding Name}"
                             />

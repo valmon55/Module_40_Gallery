@@ -10,6 +10,7 @@
             <Label Text="ЗДЕСь БУДЕТ КАРТИНКА!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Image Source="{x:Static local:PictureViewPage.pictureFile}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

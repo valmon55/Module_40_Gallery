@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,14 @@ namespace XMR.Gallery.Pages
     public partial class PictureViewPage : ContentPage
     {
         public static string ImageName { get; set; }
-        public PictureViewPage(string imageName)
+        public Model.Picture picture { get; set; }
+        public static string pictureFile { get; set; }
+        public PictureViewPage(Model.Picture _picture)
         {
-            ImageName = imageName;
-
+            ImageName = "Картинка";
+            picture = _picture;
+            pictureFile = _picture.Path;
+                //System.IO.Path.Combine(_picture.Path, _picture.Name);
             InitializeComponent();
         }
     }
