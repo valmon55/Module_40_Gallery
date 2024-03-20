@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Android.Database;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,21 +17,21 @@ namespace XMR.Gallery.Pages
     public partial class PictureListPage : ContentPage
     {
         public static string PageName { get; set; }
-        public List<Picture> Pictures { get; set; } = new List<Picture>();
+        public ObservableCollection<Picture> Pictures { get; set; } = new ObservableCollection<Picture>();
         private Picture currentPicture { get; set; }
         public PictureListPage(string pageName)
         {
             PageName = pageName;
             
-            Pictures.AddRange(GetAllCameraPictures());
+            Pictures = GetAllCameraPictures();
 
             InitializeComponent();
 
             BindingContext = this;
         }
-        private List<Picture> GetAllCameraPictures()
+        private ObservableCollection<Picture> GetAllCameraPictures()
         {
-            List<Picture> list = new List<Picture>();
+            ObservableCollection<Picture> list = new ObservableCollection<Picture>();
 
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach (var drive in drives)
@@ -42,7 +44,7 @@ namespace XMR.Gallery.Pages
                     if (Directory.Exists(cameraDirectory))
                     {
                         // Получаем список файлов картинок в директории камеры
-                        string[] imageFiles = Directory.GetFiles(cameraDirectory, "*.jpg").Take(20).ToArray();
+                        string[] imageFiles = Directory.GetFiles(cameraDirectory, "*.jpg").OrderByDescending(x => x).Take(20).ToArray();
                         foreach (var imageFile in imageFiles)
                         {
                             // Используем относительный путь для создания объекта Picture
@@ -98,11 +100,35 @@ namespace XMR.Gallery.Pages
         //}
         private async void OpenPicture(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PictureViewPage( currentPicture ) );
+            if (currentPicture is null)
+            {
+                await DisplayAlert("Картинка", "Выберете картинку", "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new PictureViewPage(currentPicture));
+            }
         }
         private async void DeletePicture(object sender, EventArgs e)
-        {
-            await DisplayAlert("Удаление", "Удаляем картинку", "Отмена");
+        {            
+            try
+            {
+                if (currentPicture is null)
+                {
+                    await DisplayAlert("Картинка", "Выберете картинку", "OK");
+                }
+                else
+                {
+                    File.Delete(currentPicture.Path);
+                    await DisplayAlert("Удаление", $"Картинка {currentPicture.Name} удалена", "OK");
+                    Pictures.Remove(currentPicture);
+                }
+            }
+            catch(Exception ex)
+            {
+                await DisplayAlert("Ошибка", $"Возникла ошибка: {ex.Message}", "OK");
+            }
+            
         }
         private void GetPictures(string pictureGallery) 
         { 
