@@ -6,12 +6,12 @@ namespace XMR.Gallery.Model
 {
     public class Picture
     {
-        public string Path { get; set; }
+        public string FullFileName { get; set; }
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
-        public Picture(string path, string name, DateTime creationDate) 
-        { 
-            Path = path;
+        public Picture(string fullFileName, string name, DateTime creationDate) 
+        {
+            FullFileName = fullFileName;
             Name = name;
             CreationDate = creationDate;    
         }

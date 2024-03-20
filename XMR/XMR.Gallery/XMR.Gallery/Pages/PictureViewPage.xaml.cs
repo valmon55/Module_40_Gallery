@@ -21,7 +21,7 @@ namespace XMR.Gallery.Pages
         {
             ImageName = _picture.Name;
             picture = _picture;
-            pictureFile = _picture.Path;
+            pictureFile = _picture.FullFileName;
             ImageDateStr = "Создана " + _picture.CreationDate.ToLongDateString() + " в " +_picture.CreationDate.ToLongTimeString();
             InitializeComponent();
         }

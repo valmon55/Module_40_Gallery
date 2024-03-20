@@ -17,7 +17,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell Height="150"  
-                            ImageSource="{Binding Path}"
+                            ImageSource="{Binding FullFileName}"
                             Text="{Binding Name}"
                             />
                     </DataTemplate>

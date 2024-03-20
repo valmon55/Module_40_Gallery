@@ -119,9 +119,16 @@ namespace XMR.Gallery.Pages
                 }
                 else
                 {
-                    File.Delete(currentPicture.Path);
-                    await DisplayAlert("Удаление", $"Картинка {currentPicture.Name} удалена", "OK");
-                    Pictures.Remove(currentPicture);
+                    if (File.Exists(currentPicture.FullFileName))
+                    {
+                        File.Delete(currentPicture.FullFileName);
+                        await DisplayAlert("Удаление", $"Картинка {currentPicture.Name} удалена", "OK");
+                        Pictures.Remove(currentPicture);
+                    }
+                    else
+                    {
+                        await DisplayAlert("Удаление", $"Картинка {currentPicture.Name} не найден", "OK");
+                    }
                 }
             }
             catch(Exception ex)
