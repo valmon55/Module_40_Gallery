@@ -6,6 +6,8 @@ using Xamarin.Forms.Xaml;
 // Needed for Picking photo/video
 [assembly: UsesPermission(Android.Manifest.Permission.ReadExternalStorage)]
 [assembly: UsesPermission(Android.Manifest.Permission.ReadMediaImages)]
+[assembly: UsesPermission(Android.Manifest.Permission_group.Storage)]
+[assembly: UsesPermission(Android.Manifest.Permission.ManageMedia)]
 // Needed for Taking photo/video
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
 [assembly: UsesPermission(Android.Manifest.Permission.Camera)]

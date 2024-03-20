@@ -26,11 +26,38 @@ namespace XMR.Gallery.Pages
             Pictures.Add(new Picture("VOLUME1/DCIM/Camera/20230506_100622.jpg", "Картинка 1"));
             Pictures.Add(new Picture("VOLUME1\\DCIM\\Camera\\20230508_130949.jpg", "Картинка 2"));
 
-            Pictures.AddRange(GetAllPictures());
+            Pictures.AddRange(GetAllCameraPictures());
 
             InitializeComponent();
 
             BindingContext = this;
+        }
+        private List<Picture> GetAllCameraPictures()
+        {
+            List<Picture> list = new List<Picture>();
+
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            foreach (var drive in drives)
+            {
+                // Проверяем доступность диска перед использованием
+                if (drive.IsReady)
+                {
+                    // Получаем список файлов в директории DCIM/Camera для каждого доступного диска
+                    string cameraDirectory = Path.Combine(drive.Name, "DCIM", "Camera");
+                    if (Directory.Exists(cameraDirectory))
+                    {
+                        // Получаем список файлов картинок в директории камеры
+                        string[] imageFiles = Directory.GetFiles(cameraDirectory, "*.jpg");
+                        foreach (var imageFile in imageFiles)
+                        {
+                            // Используем относительный путь для создания объекта Picture
+                            //string relativePath = Path.GetRelativePath(drive.Name, imageFile);
+                            list.Add(new Picture(Path.GetFullPath(imageFile), Path.GetFileName(imageFile)));
+                        }
+                    }
+                }
+            }
+            return list;
         }
         private List<Picture> GetAllPictures()
         {
