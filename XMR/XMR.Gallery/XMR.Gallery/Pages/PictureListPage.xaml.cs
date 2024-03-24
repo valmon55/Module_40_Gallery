@@ -69,13 +69,39 @@ namespace XMR.Gallery.Pages
                 await Navigation.PushAsync(new PictureViewPage(currentPicture));
             }
         }
+        private async void CreatePhoto(object sender, EventArgs e)
+        {
+            try 
+            { 
+                var photo = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions
+                {
+                    Title = $"xamarin.{DateTime.Now.ToString("dd.MM.yyyy_hh.mm.ss")}.png"
+                });
+                // для примера сохраняем файл в локальном хранилище
+                var newFile = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
+                using (var stream = await photo.OpenReadAsync())
+                using (var newStream = File.OpenWrite(newFile))
+                    await stream.CopyToAsync(newStream);
+            }
+            catch(Exception ex) 
+            {
+                await DisplayAlert("Сообщение об ошибке", ex.Message, "OK");
+            }
+        }
         private async void DeletePicture(object sender, EventArgs e)
         {
             var delStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
             if (delStatus != PermissionStatus.Granted)
             {
                 await DisplayAlert($"StorageWrite permission is {delStatus.ToString()}", "Attempt to get it!", "OK");
-                delStatus = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                try
+                {
+                    delStatus = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
             await DisplayAlert("StorageWrite permission", delStatus.ToString(), "OK");
             try

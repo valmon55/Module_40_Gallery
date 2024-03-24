@@ -13,7 +13,7 @@
             <ListView x:Name="pictureList" ItemSelected="pictureList_ItemSelected" 
                       HasUnevenRows="True"
                       ItemsSource="{Binding Pictures}"
-                      >
+                      >+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell Height="150"  
@@ -23,9 +23,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid ColumnDefinitions="50*, 50*" RowDefinitions="45" Margin="10,15">
+            <Grid ColumnDefinitions="Auto" RowDefinitions="45" Margin="10,15">
                 <Button Text="Открыть" Clicked="OpenPicture" Grid.Column="0" />
-                <Button Text="Удалить" Clicked="DeletePicture" Grid.Column="1" />
+                <Button Text="Сфоткать" Clicked="CreatePhoto" Grid.Column="1" />
+                <Button Text="Удалить" Clicked="DeletePicture" Grid.Column="2" />
             </Grid>
         </StackLayout>
     </ContentPage.Content>
