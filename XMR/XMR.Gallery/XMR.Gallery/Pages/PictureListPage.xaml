@@ -13,7 +13,7 @@
             <ListView x:Name="pictureList" ItemSelected="pictureList_ItemSelected" 
                       HasUnevenRows="True"
                       ItemsSource="{Binding Pictures}"
-                      >+
+                      >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell Height="150"  
