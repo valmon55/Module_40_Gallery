@@ -12,7 +12,7 @@ namespace XMR.Gallery
         {
             InitializeComponent();
 
-            GetRWPermissions();
+            //GetRWPermissions();
             MainPage = new NavigationPage(new MainPage());
         }
         private async Task GetRWPermissions()

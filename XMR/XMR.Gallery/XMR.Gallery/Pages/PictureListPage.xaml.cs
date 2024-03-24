@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 using XMR.Gallery.Model;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace XMR.Gallery.Pages
 {
@@ -47,7 +49,7 @@ namespace XMR.Gallery.Pages
                         string[] imageFiles = Directory.GetFiles(cameraDirectory, "*.jpg").OrderByDescending(x => x).Take(20).ToArray();
                         foreach (var imageFile in imageFiles)
                         {
-                            // Используем относительный путь для создания объекта Picture
+                            // Используем относительный путь для создания объекта Picture - нет в версии standart 2.0
                             //string relativePath = Path.GetRelativePath(drive.Name, imageFile);
                             list.Add(new Picture(Path.GetFullPath(imageFile), Path.GetFileName(imageFile), File.GetCreationTime(imageFile)));                            
                         }
@@ -56,48 +58,6 @@ namespace XMR.Gallery.Pages
             }
             return list;
         }
-        //private List<Picture> GetAllPictures()
-        //{
-        //    DriveInfo[] drives = DriveInfo.GetDrives();
-            
-        //    List<Picture> list = new List<Picture>();
-
-        //    foreach(var drive in drives)
-        //    {
-        //        list.AddRange(GetAllDrivePicture(drive.RootDirectory,"jpg"));
-        //    }
-        //    return list;
-        //}
-        //private List<Picture> GetAllDrivePicture(DirectoryInfo directory, string filter)
-        //{
-        //    List<Picture> list = new List<Picture>();
-        //    try
-        //    {
-        //        foreach (var dir in directory.GetDirectories())
-        //        {
-        //            list.AddRange(GetDirFiles(dir, filter));
-
-        //        }
-        //    }
-        //    catch(Exception ex) { }
-        //    return list;
-        //}
-        //private List<Picture> GetDirFiles(DirectoryInfo directory, string filter)
-        //{
-        //    List<Picture> list = new List<Picture>();
-        //    try
-        //    {
-        //        foreach (var file in directory.GetFiles())
-        //        {
-        //            if (file.Name.Contains(filter))
-        //            {
-        //                list.Add(new Picture(directory.Name, file.Name));
-        //            }
-        //        }
-        //    }
-        //    catch(Exception ex) { } 
-        //    return list;
-        //}
         private async void OpenPicture(object sender, EventArgs e)
         {
             if (currentPicture is null)
@@ -110,7 +70,14 @@ namespace XMR.Gallery.Pages
             }
         }
         private async void DeletePicture(object sender, EventArgs e)
-        {            
+        {
+            var delStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+            if (delStatus != PermissionStatus.Granted)
+            {
+                await DisplayAlert($"StorageWrite permission is {delStatus.ToString()}", "Attempt to get it!", "OK");
+                delStatus = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            }
+            await DisplayAlert("StorageWrite permission", delStatus.ToString(), "OK");
             try
             {
                 if (currentPicture is null)
@@ -137,11 +104,6 @@ namespace XMR.Gallery.Pages
             }
             
         }
-        private void GetPictures(string pictureGallery) 
-        { 
-            
-        }
-
         private async void pictureList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
