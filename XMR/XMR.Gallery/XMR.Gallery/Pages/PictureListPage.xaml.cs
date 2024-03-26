@@ -43,7 +43,8 @@ namespace XMR.Gallery.Pages
                 if (drive.IsReady)
                 {
                     // Получаем список файлов в директории DCIM/Camera для каждого доступного диска
-                    string cameraDirectory = Path.Combine(drive.Name, "DCIM", "Camera");
+                    //string cameraDirectory = Path.Combine(drive.Name, "DCIM", "Camera");
+                    string cameraDirectory = Path.Combine(drive.Name, "Pictures");
                     if (Directory.Exists(cameraDirectory))
                     {
                         // Получаем список файлов картинок в директории камеры
@@ -99,7 +100,7 @@ namespace XMR.Gallery.Pages
                 if (drive.IsReady)
                 {
                     // Получаем список файлов в директории DCIM/Camera для каждого доступного диска
-                    string cameraDirectory = Path.Combine(drive.Name, "DCIM", "Camera");
+                    string cameraDirectory = Path.Combine(drive.Name, "Pictures");
                     if (Directory.Exists(cameraDirectory))
                     {
                         return cameraDirectory;
