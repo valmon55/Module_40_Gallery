@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using XMR.Gallery.Model;
 using System.Runtime.InteropServices.ComTypes;
+using Java.Util;
 
 namespace XMR.Gallery.Pages
 {
@@ -78,7 +79,8 @@ namespace XMR.Gallery.Pages
                     Title = $"xamarin.{DateTime.Now.ToString("dd.MM.yyyy_hh.mm.ss")}.png"
                 });
                 // для примера сохраняем файл в локальном хранилище
-                var newFile = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
+                //var newFile = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
+                var newFile = Path.Combine(GetAvailableDir(), photo.FileName);
                 using (var stream = await photo.OpenReadAsync())
                 using (var newStream = File.OpenWrite(newFile))
                     await stream.CopyToAsync(newStream);
@@ -87,6 +89,24 @@ namespace XMR.Gallery.Pages
             {
                 await DisplayAlert("Сообщение об ошибке", ex.Message, "OK");
             }
+        }
+        private string GetAvailableDir()
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            foreach (var drive in drives)
+            {
+                // Проверяем доступность диска перед использованием
+                if (drive.IsReady)
+                {
+                    // Получаем список файлов в директории DCIM/Camera для каждого доступного диска
+                    string cameraDirectory = Path.Combine(drive.Name, "DCIM", "Camera");
+                    if (Directory.Exists(cameraDirectory))
+                    {
+                        return cameraDirectory;
+                    }
+                }
+            }
+            return string.Empty;
         }
         private async void DeletePicture(object sender, EventArgs e)
         {
